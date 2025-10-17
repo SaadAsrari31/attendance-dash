@@ -7,52 +7,62 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <script>
+
+<script>
+    // Redirect to login if not logged in
     if(sessionStorage.getItem('loggedIn') !== 'true'){
         window.location.href = 'login.html';
     }
-  </script>
+</script>
 
-  <header>
-    <h1>📊 Smart Attendance Monitoring System Using Facial Recognition</h1>
-  </header>
+<header>
+  <h1>📊 Smart Attendance Monitoring System Using Facial Recognition</h1>
+</header>
 
-  <main>
-    <section id="summary">
-      <h2>Today's Summary</h2>
-      <p>Total Students: <span id="total">0</span></p>
-      <p>Present: <span id="present">0</span></p>
-      <p>Absent: <span id="absent">0</span></p>
-    </section>
+<main>
+  <section id="summary">
+    <h2>Today's Summary</h2>
+    <p>Total Students: <span id="total">0</span></p>
+    <p>Present: <span id="present">0</span></p>
+    <p>Absent: <span id="absent">0</span></p>
+  </section>
 
-    <section id="table-section">
-      <h2>Attendance Records</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="attendance-table">
-          <!-- Data will load here dynamically -->
-        </tbody>
-      </table>
-    </section>
+  <section id="table-section">
+    <h2>Attendance Records</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="attendance-table">
+        <!-- Data will load here dynamically -->
+      </tbody>
+    </table>
+  </section>
 
-    <button onclick="logout()" class="logout-btn">Logout</button>
-  </main>
+  <button onclick="logout()">Logout</button>
+</main>
 
-  <footer>
-    <p>© 2025 Attendance Monitoring System</p>
-  </footer>
+<footer>
+  <p>© 2025 Attendance Monitoring System</p>
+</footer>
 
-  <!-- PapaParse for CSV -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<!-- PapaParse for CSV parsing if needed -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
-  <!-- Custom Script -->
-  <script src="script.js"></script>
+<!-- Custom Script -->
+<script src="script.js"></script>
+
+<script>
+function logout() {
+    sessionStorage.removeItem('loggedIn');
+    window.location.href = 'login.html';
+}
+</script>
+
 </body>
 </html>
