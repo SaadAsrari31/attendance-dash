@@ -1,0 +1,66 @@
+<script>
+    if(sessionStorage.getItem('loggedIn') !== 'true'){
+        window.location.href = 'login.html'; // Redirect to login if not logged in
+    }
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Monitoring System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>📊 Smart Attendance monitoring System Using Facial Recognition</h1>
+  </header>
+
+  <main>
+    <section id="summary">
+      <h2>Today's Summary</h2>
+      <p>Total Students: <span id="total">0</span></p>
+      <p>Present: <span id="present">0</span></p>
+      <p>Absent: <span id="absent">0</span></p>
+    </section>
+
+    <section id="table-section">
+      <h2>Attendance Records</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="attendance-table">
+          <!-- Data will load here dynamically -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Attendance Monitoring System</p>
+  </footer>
+
+  <!-- PapaParse for CSV -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+  <!-- Custom Script -->
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+<button onclick="logout()">Logout</button>
+
+<script>
+function logout() {
+    sessionStorage.removeItem('loggedIn');
+    window.location.href = 'login.html';
+}
+</script>
