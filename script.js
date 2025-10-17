@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const sheetUrl = "https://opensheet.elk.sh/2PACX-1vQsPyaz03qLXlDsfSsgQX6Ix1xqfFFf0FaB_ku1Eqd1yr2iB6dJJxy8L1GSicg8eb4_1TxAmcmig8n4/AttendanceData";
+  const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsPyaz03qLXlDsfSsgQX6Ix1xqfFFf0FaB_ku1Eqd1yr2iB6dJJxy8L1GSicg8eb4_1TxAmcmig8n4/pub?output=csv";
 
 // <-- replace with your ID + sheet name
 
