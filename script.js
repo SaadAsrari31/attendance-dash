@@ -1,36 +1,51 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsPyaz03qLXlDsfSsgQX6Ix1xqfFFf0FaB_ku1Eqd1yr2iB6dJJxy8L1GSicg8eb4_1TxAmcmig8n4/pub?output=csv";
 
-// <-- replace with your ID + sheet name
+    function fetchAttendance() {
+        const tbody = document.getElementById("attendance-table");
 
-  fetch(sheetUrl)
-    .then(res => res.json())
-    .then(data => {
-      const tbody = document.getElementById("attendance-table");
-      tbody.innerHTML = "";
+        fetch('attendance.csv?ts=' + new Date().getTime()) // prevent caching
+            .then(response => response.text())
+            .then(csvText => {
+                tbody.innerHTML = "";
 
-      let presentCount = 0;
-      let absentCount = 0;
+                const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
+                const data = parsed.data;
 
-      data.forEach(row => {
-        if (!row.Name) return;
+                let presentCount = 0;
+                let absentCount = 0;
 
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${row.Name}</td>
-          <td>${row.Date}</td>
-          <td>${row.Time}</td>
-          <td class="${row.Status.toLowerCase()}">${row.Status}</td>
-        `;
-        tbody.appendChild(tr);
+                data.forEach(row => {
+                    if (!row.Name) return;
 
-        if (row.Status === "Present") presentCount++;
-        else if (row.Status === "Absent") absentCount++;
-      });
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${row.Name}</td>
+                        <td>${row.Date}</td>
+                        <td>${row.Time}</td>
+                        <td class="${row.Status.toLowerCase()}">${row.Status}</td>
+                    `;
+                    tbody.appendChild(tr);
 
-      document.getElementById("total").textContent = data.length;
-      document.getElementById("present").textContent = presentCount;
-      document.getElementById("absent").textContent = absentCount;
-    })
-    .catch(err => console.error("Error fetching sheet:", err));
+                    if (row.Status === "Present") presentCount++;
+                    else if (row.Status === "Absent") absentCount++;
+                });
+
+                document.getElementById("total").textContent = data.length;
+                document.getElementById("present").textContent = presentCount;
+                document.getElementById("absent").textContent = absentCount;
+            })
+            .catch(err => console.error("Error loading attendance CSV:", err));
+    }
+
+    // Initial fetch
+    fetchAttendance();
+
+    // Auto-refresh every 10 seconds
+    setInterval(fetchAttendance, 10000);
+
+    // Logout function
+    window.logout = function() {
+        sessionStorage.removeItem('loggedIn');
+        window.location.href = 'login.html';
+    }
 });

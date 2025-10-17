@@ -4,7 +4,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Example hardcoded users (replace with database in future)
+    // Hardcoded users
     const users = [
         { username: "teacher1", password: "12345" },
         { username: "student1", password: "abcd" }
@@ -13,9 +13,8 @@ document.getElementById('loginForm').addEventListener('submit', function(e){
     const user = users.find(u => u.username === username && u.password === password);
 
     if(user){
-        // Store login info in localStorage/sessionStorage
         sessionStorage.setItem('loggedIn', 'true');
-        window.location.href = 'index.html'; // Redirect to your attendance dashboard
+        window.location.href = 'index.html';
     } else {
         document.getElementById('errorMsg').innerText = "Invalid username or password!";
     }
