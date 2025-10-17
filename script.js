@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const sheetUrl = "https://opensheet.elk.sh/1aAS9-IxiqwQ3p6Epszo6mX-CNNM0biN1KfZmLiChOAE/Sheet1"; // <-- replace with your ID + sheet name
+  const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQsPyaz03qLXlDsfSsgQX6Ix1xqfFFf0FaB_ku1Eqd1yr2iB6dJJxy8L1GSicg8eb4_1TxAmcmig8n4/pub?output=csv";
+// <-- replace with your ID + sheet name
 
   fetch(sheetUrl)
     .then(res => res.json())
     .then(data => {
-      console.log("Fetched data:", data); // ✅ Check in console
       const tbody = document.getElementById("attendance-table");
       tbody.innerHTML = "";
 
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       let absentCount = 0;
 
       data.forEach(row => {
-        if (!row.Name) return; // skip empty rows
+        if (!row.Name) return;
 
         const tr = document.createElement("tr");
         tr.innerHTML = `
